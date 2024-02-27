@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: tim
+      changes:
+        - sqlFile:
+            path: schema.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 2
+      author: tim
+      changes:
+        - sqlFile:
+            path: 1.sql
+            relativeToChangelogFile: true
+
+
