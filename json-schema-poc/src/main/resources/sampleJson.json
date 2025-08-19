@@ -1,0 +1,8 @@
+{
+  "firstname" : "Homer",
+  "surname" : "Simpson",
+  "dateOfBirth" : "1965-01-01",
+  "addressLines" : [ "123 Fake Street", "Springfield" ],
+  "sex" : "Male",
+  "notes" : "blah blah blah blah blah"
+}
