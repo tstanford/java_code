@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -10,23 +11,25 @@ import tools.jackson.core.JacksonException;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.json.JsonMapper;
 
-import java.io.IOException;
-import java.rmi.server.ExportException;
 import java.util.List;
 
 @Component
 public class DataLoader implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(DataLoader.class);
-    private static final String PEOPLE_JSON_PATH = "classpath:/data/people.json";
+    private final String peopleJsonPath;
 
     private List<Person> people;
     private final JsonMapper jsonMapper;
     private final ResourceLoader resourceLoader;
 
-    public DataLoader(JsonMapper jsonMapper, ResourceLoader resourceLoader) {
+    public DataLoader(JsonMapper jsonMapper,
+                      ResourceLoader resourceLoader,
+                      @Value("${jacksontest.jsonfile}") String peopleJsonPath) {
+        this.peopleJsonPath = peopleJsonPath;
         this.jsonMapper = jsonMapper;
         this.resourceLoader = resourceLoader;
+
     }
 
     @Override
@@ -34,10 +37,10 @@ public class DataLoader implements CommandLineRunner {
         log.info("Loading people");
         validateSerialization(List.of(new Person("Dave", "Brown")));
         try{
-            Resource resource = resourceLoader.getResource(PEOPLE_JSON_PATH);
+            Resource resource = resourceLoader.getResource(peopleJsonPath);
 
             if(!resource.exists()) {
-                log.error("file not found {}", PEOPLE_JSON_PATH);
+                log.error("file not found {}", peopleJsonPath);
                 return;
             }
 
