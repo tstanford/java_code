@@ -7,12 +7,6 @@ import tools.jackson.databind.json.JsonMapper;
 @SpringBootApplication
 public class Application {
 
-    private final JsonMapper jsonMapper;
-
-    public Application(JsonMapper jsonMapper) {
-        this.jsonMapper = jsonMapper;
-    }
-
     static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

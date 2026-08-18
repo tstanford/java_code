@@ -1,0 +1,4 @@
+*/.idea/**
+.memory
+.smallcode
+.code-graph
